@@ -1,4 +1,4 @@
-package com.applaudo.challenge.base;
+package com.applaudo.challenge.tests.base;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -18,24 +18,24 @@ public class Base {
         Properties pProperties = new Properties();
         FileInputStream fisFileInput = new FileInputStream("Drivers/data.properties");
         pProperties.load(fisFileInput);
-        String sBroweser = pProperties.getProperty("browser");
+        String sBrowser = pProperties.getProperty("browser");
 
-        if (sBroweser.equals("chrome")) {
+        if (sBrowser.equals("chrome")) {
             // To run test on chrome
             System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver.exe");
             myDriver = new ChromeDriver();
-        } else if (sBroweser.equals("firefox")) {
+        } else if (sBrowser.equals("firefox")) {
             // To run test on firefox
             System.setProperty("webdriver.gecko.driver", "Drivers/geckodriver.exe");
             myDriver = new FirefoxDriver();
 
-        } else if (sBroweser.equals("IE")) {
+        } else if (sBrowser.equals("IE")) {
             // To run test on internet explorer
             System.setProperty("webdriver.ie.driver", "Drivers/IEDriverServer.exe");
             myDriver = new InternetExplorerDriver();
         }
 
-        // To wait before each test
+        // To wait for the elements in the page to fully load
         myDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
         return myDriver;
