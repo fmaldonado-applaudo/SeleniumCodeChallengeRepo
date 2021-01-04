@@ -51,7 +51,7 @@ public class ChallengeTest  extends Base {
     }
 
 
-    @Test(priority = 0, groups = "Cart")
+    @Test(groups = "Cart")
     public void addToCartTest() {
         try {
             String sResult;
@@ -84,9 +84,26 @@ public class ChallengeTest  extends Base {
     }
 
     @Test(priority = 1, groups = "Cart", dependsOnMethods = "addToCartTest")
-    public void myTestTwo() {
-        System.out.println("testTwo");
-        etTestLogger = erExtent.createTest("myTestTwo");
-        etTestLogger.log(Status.INFO,"Run Test Two Done!");
+    public void removeItemFromCart() {
+        boolean bValue;
+        String sValue;
+
+        etTestLogger = erExtent.createTest("removeItemFromCart");
+        //AFTER THE PREVIOUS TEST, STAY ON PAGE AND HOVER TO CART BUTTON
+        etTestLogger.log(Status.INFO,"Start Test.");
+        etTestLogger.log(Status.INFO,"Mouse hover and click in cart button.");
+        oTestPageAction.hoverInCartButtonAndClick();
+
+        //GET AND VALIDATE THE LIST FROM CART LIST
+        bValue = oTestPageAction.validateExistingItem();
+        Assert.assertTrue(bValue);
+        etTestLogger.log(Status.PASS,"List contains an item.");
+        oTestPageAction.clickTrashButton();
+        etTestLogger.log(Status.PASS,"Remove item from list");
+
+        //VALIDATE EMPTY CART MESSAGE
+        sValue = oTestPageAction.getEmptyCartMessage();
+        Assert.assertEquals(sValue,"Your shopping cart is empty.");
+        etTestLogger.log(Status.PASS,"Expected and Actual result are the same. Result: 'Your shopping cart is empty.'");
     }
 }
