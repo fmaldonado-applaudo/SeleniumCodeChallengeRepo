@@ -12,6 +12,7 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.io.IOException;
+import java.util.List;
 
 public class ChallengeTest  extends Base {
     String sPageUrl = "http://automationpractice.com/index.php";
@@ -108,7 +109,7 @@ public class ChallengeTest  extends Base {
         etTestLogger.log(Status.PASS,"Expected and Actual result are the same. Result: 'Your shopping cart is empty.'");
     }
 
-    @Test(priority = 2, groups = "Search", dataProvider = "searchValue", dataProviderClass = DataProviders.class)
+    @Test(priority = 3, groups = "Search", dataProvider = "searchValue", dataProviderClass = DataProviders.class)
     public void searchItems(String sValue) {
         String sResult;
 
@@ -138,6 +139,30 @@ public class ChallengeTest  extends Base {
             }else {
                 etTestLogger.log(Status.FAIL,"Expected and actual results are different.");
             }
+        }
+    }
+
+    @Test(groups = "Store")
+    public void validateStoreInformation() {
+        try {
+            etTestLogger = erExtent.createTest("validateStoreInformation");
+
+            //SCROLL TO BOTTOM
+            etTestLogger.log(Status.INFO, "Start Test.");
+            oTestPageAction.scrollToBottom();
+            etTestLogger.log(Status.PASS, "Scroll to bottom.");
+
+            //GET THE STORE INFORMATION
+            List<String> sListOfResult = oTestPageAction.getStoreInfo();
+            for (String sElement : sListOfResult) {
+                System.out.println(sElement);
+                etTestLogger.log(Status.INFO, "Validate: " + sElement);
+                Assert.assertTrue(sElement.equals("Selenium Framework, Research Triangle Park, North Carolina, USA") || sElement.equals("Call us now: (347) 466-7432") || sElement.equals("Email: support@seleniumframework.com"));
+                etTestLogger.log(Status.PASS, "Pass: " + sElement);
+            }
+        }catch (Exception eEx){
+            etTestLogger.log(Status.FAIL,"Error: " + eEx);
+            Assert.fail();
         }
     }
 }

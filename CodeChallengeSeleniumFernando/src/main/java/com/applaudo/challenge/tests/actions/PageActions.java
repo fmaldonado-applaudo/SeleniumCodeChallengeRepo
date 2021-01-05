@@ -4,10 +4,14 @@ package com.applaudo.challenge.tests.actions;
 import com.applaudo.challenge.tests.pageobjects.CartPageObject;
 import com.applaudo.challenge.tests.pageobjects.ItemDetailPageObjects;
 import com.applaudo.challenge.tests.pageobjects.StartPageObjects;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PageActions {
 
@@ -42,6 +46,20 @@ public class PageActions {
     public String getResultTextAfterSearch(){
         WebElement weElements = oStartPageObjects.getResultText();
         return weElements.getText();
+    }
+
+    public List<String> getStoreInfo(){
+        List<String> sListOfResult = new ArrayList<String>();
+        List<WebElement> weElements = oStartPageObjects.getFooterStoreInfo();
+        for (WebElement weElement : weElements) {
+            sListOfResult.add(weElement.getText());
+        }
+        return sListOfResult;
+    }
+
+    public void scrollToBottom(){
+        JavascriptExecutor jsExecutor = (JavascriptExecutor)myDriver;
+        jsExecutor.executeScript("window.scrollTo(0, document.body.scrollHeight)");
     }
 
     //==========================================================ITEM DETAILS PAGE ACTIONS====================================================
