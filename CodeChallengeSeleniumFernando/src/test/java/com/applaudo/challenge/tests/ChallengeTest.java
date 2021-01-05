@@ -49,7 +49,7 @@ public class ChallengeTest  extends Base {
     @AfterClass
     public void afterClass() {
         erExtent.flush();
-        //myDriver.quit();
+        myDriver.quit();
     }
 
 
