@@ -23,6 +23,11 @@ public class ItemDetailPageObjects {
     //Variable to find the close button in the popup window
     private final By selectorForCloseButton = By.cssSelector(".cross");
 
+    //Variable to find the cart button
+    private final By selectorForCartButton = By.xpath(".//header/div[3]/div[1]/div[1]/div[3]/div[1]/a[1]");
+
+
+
     // ================================================== LOCATE OBJECT SECTION =============================================================
 
     /*
@@ -56,5 +61,16 @@ public class ItemDetailPageObjects {
     public WebElement getCloseButton() {
         WebDriverWait wdWait = new WebDriverWait(myDriver,15);
         return wdWait.until(ExpectedConditions.visibilityOfElementLocated(selectorForCloseButton));
+    }
+
+    /*
+     * METHOD: getCartButton
+     * AUTHOR: Fernando Maldonado
+     * CREATED: 04/JAN/2021- Fernando Maldonado
+     * UPDATED: 04/JAN/2021- Fernando Maldonado
+     */
+    public WebElement getCartButton() {
+        WebDriverWait wdWait = new WebDriverWait(myDriver,15);
+        return wdWait.until(ExpectedConditions.visibilityOfElementLocated(selectorForCartButton));
     }
 }
