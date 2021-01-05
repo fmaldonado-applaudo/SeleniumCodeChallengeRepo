@@ -2,6 +2,7 @@ package com.applaudo.challenge.tests;
 
 import com.applaudo.challenge.tests.actions.PageActions;
 import com.applaudo.challenge.tests.base.Base;
+import com.applaudo.challenge.tests.dataproviders.DataProviders;
 import com.applaudo.challenge.tests.utilities.Utilities;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -105,5 +106,38 @@ public class ChallengeTest  extends Base {
         sValue = oTestPageAction.getEmptyCartMessage();
         Assert.assertEquals(sValue,"Your shopping cart is empty.");
         etTestLogger.log(Status.PASS,"Expected and Actual result are the same. Result: 'Your shopping cart is empty.'");
+    }
+
+    @Test(priority = 2, groups = "Search", dataProvider = "searchValue", dataProviderClass = DataProviders.class)
+    public void searchItems(String sValue) {
+        String sResult;
+
+        if(sValue.equals("Skirt")){
+            etTestLogger = erExtent.createTest("Valid searchItems");
+        }else{
+            etTestLogger = erExtent.createTest("Invalid searchItems");
+        }
+
+        //TYPE THE VALUE IN THE SEARCH INPUT
+        etTestLogger.log(Status.INFO,"Start Test.");
+        etTestLogger.log(Status.INFO,"Insert the value: " + sValue);
+        myDriver.get(sPageUrl);
+        oTestPageAction.typeInSearchInputAnd(sValue);
+
+        //CLICK SEARCH BUTTON AND VALIDATE THE RESULT
+        etTestLogger.log(Status.INFO,"Click search button.");
+        oTestPageAction.clickSearchButton();
+        sResult = oTestPageAction.getResultTextAfterSearch();
+        if(sResult.equals("0 results have been found.")){
+            //INVALID VALUES VALIDATION
+            etTestLogger.log(Status.PASS,"Invalid value search passed. Value: " + sValue);
+        }else{
+            //VALID VALUES VALIDATION
+            if(sResult.contains("results has been found.") || sResult.contains("result has been found.")){
+                etTestLogger.log(Status.PASS,"Valid value search passed. Value: " + sValue);
+            }else {
+                etTestLogger.log(Status.FAIL,"Expected and actual results are different.");
+            }
+        }
     }
 }

@@ -29,6 +29,21 @@ public class PageActions {
         weElements.click();
     }
 
+    public void typeInSearchInputAnd(String sValue){
+        WebElement weElements = oStartPageObjects.getSearchInput();
+        weElements.sendKeys(sValue);
+    }
+
+    public void clickSearchButton(){
+        WebElement weElements = oStartPageObjects.getSearchButton();
+        weElements.click();
+    }
+
+    public String getResultTextAfterSearch(){
+        WebElement weElements = oStartPageObjects.getResultText();
+        return weElements.getText();
+    }
+
     //==========================================================ITEM DETAILS PAGE ACTIONS====================================================
     public void clickAddToCartButton(){
         WebElement weElement = oItemDetailObjects.getAddToCartButton();
