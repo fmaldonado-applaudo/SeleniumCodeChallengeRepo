@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 public class StartPageObjects {
     public WebDriver myDriver;
 
@@ -25,6 +27,12 @@ public class StartPageObjects {
 
     //Variable to find the result text from the search
     private final By selectorForResultText = By.xpath("//span[contains(text(),'been found.')]");
+
+    //Variable to find the list that contains the store info
+    private final By selectorForFooterUl = By.xpath("//body/div[@id='page']/div[3]/footer[1]/div[1]/section[6]/div[1]/ul[1]");
+
+    //Variable to find the li inside ul
+    private final By selectorForFooterIl = By.tagName("li");
 
 
 
@@ -64,7 +72,7 @@ public class StartPageObjects {
     }
 
     /*
-     * METHOD: getSearchButton
+     * METHOD: getResultText
      * AUTHOR: Fernando Maldonado
      * CREATED: 05/JAN/2021- Fernando Maldonado
      * UPDATED: 05/JAN/2021- Fernando Maldonado
@@ -72,5 +80,17 @@ public class StartPageObjects {
     public WebElement getResultText() {
         WebDriverWait wdWait = new WebDriverWait(myDriver,15);
         return wdWait.until(ExpectedConditions.visibilityOfElementLocated(selectorForResultText));
+    }
+
+    /*
+     * METHOD: getFooterUl
+     * AUTHOR: Fernando Maldonado
+     * CREATED: 05/JAN/2021- Fernando Maldonado
+     * UPDATED: 05/JAN/2021- Fernando Maldonado
+     */
+    public  List<WebElement> getFooterStoreInfo() {
+        WebDriverWait wdWait = new WebDriverWait(myDriver,15);
+        WebElement weElement = wdWait.until(ExpectedConditions.visibilityOfElementLocated(selectorForFooterUl));
+        return weElement.findElements(selectorForFooterIl);
     }
 }
