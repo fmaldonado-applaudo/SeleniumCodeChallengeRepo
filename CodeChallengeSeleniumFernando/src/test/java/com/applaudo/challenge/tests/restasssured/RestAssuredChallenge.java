@@ -1,6 +1,7 @@
-package com.applaudo.challenge.restassured;
+package com.applaudo.challenge.tests.restasssured;
 
 
+import com.applaudo.challenge.restassured.model.Characters;
 import io.restassured.http.ContentType;
 import org.testng.Assert;
 import org.testng.annotations.Test;

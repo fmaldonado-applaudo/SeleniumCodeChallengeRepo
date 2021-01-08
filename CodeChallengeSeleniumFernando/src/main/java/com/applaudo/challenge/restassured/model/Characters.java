@@ -1,4 +1,4 @@
-package com.applaudo.challenge.restassured;
+package com.applaudo.challenge.restassured.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

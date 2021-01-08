@@ -1,22 +1,19 @@
-package com.applaudo.challenge.tests;
+package com.applaudo.challenge.tests.selenium;
 
 import com.applaudo.challenge.tests.actions.PageActions;
 import com.applaudo.challenge.tests.base.Base;
 import com.applaudo.challenge.tests.dataproviders.DataProviders;
-import com.applaudo.challenge.tests.utilities.Utilities;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import org.testng.Assert;
 import org.testng.annotations.*;
-
 import java.io.IOException;
 import java.util.List;
 
 public class ChallengeTest  extends Base {
-    String sPageUrl = "http://automationpractice.com/index.php";
-    Utilities oUtilities = null;
+
 
     //Reports
     ExtentHtmlReporter htmlReporter = null;
@@ -28,13 +25,8 @@ public class ChallengeTest  extends Base {
 
     @BeforeClass
     public void beforeClass() throws IOException {
-        myDriver = initializeDriver();
-        myDriver.get(sPageUrl);
-        myDriver.manage().window().maximize();
 
-        oUtilities = new Utilities();
         oTestPageAction = new PageActions(myDriver);
-
 
         // start reporters
         htmlReporter = new ExtentHtmlReporter("./Reports/ChallengeTest.html");
@@ -122,7 +114,7 @@ public class ChallengeTest  extends Base {
         //TYPE THE VALUE IN THE SEARCH INPUT
         etTestLogger.log(Status.INFO,"Start Test.");
         etTestLogger.log(Status.INFO,"Insert the value: " + sValue);
-        myDriver.get(sPageUrl);
+        myDriver.get("http://automationpractice.com/index.php");
         oTestPageAction.typeInSearchInputAnd(sValue);
 
         //CLICK SEARCH BUTTON AND VALIDATE THE RESULT
