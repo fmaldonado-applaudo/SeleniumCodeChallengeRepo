@@ -16,12 +16,11 @@ public class RestAssuredChallenge {
     public void getAllCharacters() {
         System.out.println("Exercise 2: Get all characters");
         Characters[] aCharacters = given().headers("Content-Type", ContentType.JSON, "Accept", ContentType.JSON).when().get("https://www.breakingbadapi.com/api/characters").as(Characters[].class);
-
-        for (int i = 0; i < aCharacters.length; i++) {
-            if (aCharacters[i].getName().equals("Walter White")) {
-                iCharId = aCharacters[i].getChar_id();
+        for (Characters oChar : aCharacters){
+            if (oChar.getName().equals("Walter White")) {
+                iCharId = oChar.getChar_id();
             }
-            System.out.println("Character name: " + aCharacters[i].getName() + newLine + "Portrayed: " + aCharacters[i].getPortrayed() + newLine + "------------------------------------------------------");
+            System.out.println("Character name: " + oChar.getName() + newLine + "Portrayed: " + oChar.getPortrayed() + newLine + "------------------------------------------------------");
         }
     }
 
@@ -31,11 +30,10 @@ public class RestAssuredChallenge {
             System.out.println("Exercise 1: Get Walter White info");
             Assert.assertNotNull(iCharId);
             Characters[] aCharacters = given().headers("Content-Type", ContentType.JSON, "Accept", ContentType.JSON).when().get("https://www.breakingbadapi.com/api/characters/" + iCharId).as(Characters[].class);
-            for (int i = 0; i < aCharacters.length; i++) {
-                Assert.assertEquals(aCharacters[i].getBirthday(),"09-07-1958");
-                System.out.println("Birthday: " + aCharacters[i].getBirthday());
+            for (Characters oChar : aCharacters){
+                Assert.assertEquals(oChar.getBirthday(),"09-07-1958");
+                System.out.println("Birthday: " + oChar.getBirthday());
             }
-
     }
 
 

@@ -17,7 +17,10 @@ public class StartPageObjects {
     // ================================================== BY VARIABLE SECTION =============================================================
 
     //Variable to find an element from the list
-    private final By selectorForCartItem = By.xpath("//body/div[@id='page']/div[2]/div[1]/div[2]/div[1]/div[1]/ul[1]/li[1]");
+    private By selectorForCartItem(String sSearchText) {
+        return By.linkText(sSearchText);
+        //return By.xpath("//a[contains(text(),'" + sSearchText + "')]");
+    }
 
     //Variable to find the search input
     private final By selectorForSearchInput = By.id("search_query_top");
@@ -44,9 +47,9 @@ public class StartPageObjects {
      * CREATED: 29/DIC/2020- Fernando Maldonado
      * UPDATED: 29/DIC/2020- Fernando Maldonado
      */
-    public WebElement getFirstItemInCart() {
+    public WebElement getFirstItemInCart(String sTextValue) {
         WebDriverWait wdWait = new WebDriverWait(myDriver,15);
-        return wdWait.until(ExpectedConditions.visibilityOfElementLocated(selectorForCartItem));
+        return myDriver.findElement(selectorForCartItem(sTextValue));
     }
 
     /*

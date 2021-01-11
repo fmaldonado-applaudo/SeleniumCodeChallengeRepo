@@ -13,10 +13,7 @@ public class CartPageObject {
         this.myDriver = myDriver;
     }
     // ================================================== BY VARIABLE SECTION =============================================================
-
-    //Variable to find an item in cart
-    private final By selectorForCartItem = By.id("product_1_1_0_0");
-
+    
     //Variable to find trash button
     private final By selectorForTrashButton = By.xpath("//*[contains(@title, 'Delete')]");
 
@@ -33,7 +30,7 @@ public class CartPageObject {
      */
     public WebElement getItemInCart() {
         WebDriverWait wdWait = new WebDriverWait(myDriver,15);
-        return wdWait.until(ExpectedConditions.visibilityOfElementLocated(selectorForCartItem));
+        return wdWait.until(ExpectedConditions.visibilityOfElementLocated(selectorForTrashButton));
     }
 
     /*

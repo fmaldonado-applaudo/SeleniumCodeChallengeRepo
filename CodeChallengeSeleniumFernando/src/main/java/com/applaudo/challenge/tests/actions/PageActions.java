@@ -29,7 +29,7 @@ public class PageActions {
 
     //==========================================================START PAGE ACTIONS==========================================================
     public void clickFirstItem(){
-        WebElement weElements = oStartPageObjects.getFirstItemInCart();
+        WebElement weElements = oStartPageObjects.getFirstItemInCart("Blouse");
         weElements.click();
     }
 
