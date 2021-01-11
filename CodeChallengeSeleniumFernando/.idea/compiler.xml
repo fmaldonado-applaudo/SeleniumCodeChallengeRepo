@@ -6,8 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="CodeChallengeSeleniumFernando" />
+        <module name="Core" />
+        <module name="RestAssured" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="SeleniumTest" target="13" />
+      <module name="SeleniumTests" target="13" />
+    </bytecodeTargetLevel>
   </component>
 </project>
