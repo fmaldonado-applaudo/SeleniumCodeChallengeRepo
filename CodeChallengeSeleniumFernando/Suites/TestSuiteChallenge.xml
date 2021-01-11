@@ -4,7 +4,9 @@
 
    <test name = "CompleteTest">
       <classes>
-         <class name = "com.applaudo.challenge.tests.ChallengeTest" />
+         <class name = "selenium.CartFeatureTests" />
+         <class name = "selenium.SearchFeatureTests" />
+         <class name = "selenium.StoreInfoTests" />
       </classes>
    </test>
   

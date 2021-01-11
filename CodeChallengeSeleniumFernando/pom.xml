@@ -6,7 +6,13 @@
 
     <groupId>org.example</groupId>
     <artifactId>CodeChallengeSeleniumFernando</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>SeleniumTests</module>
+        <module>Core</module>
+        <module>RestAssured</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>13</maven.compiler.source>
@@ -23,7 +29,7 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.8</version>
+            <version>7.3.0</version>
         </dependency>
 
         <dependency>
@@ -36,13 +42,6 @@
             <groupId>com.aventstack</groupId>
             <artifactId>extentreports</artifactId>
             <version>3.1.5</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>rest-assured</artifactId>
-            <version>4.3.2</version>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -61,6 +60,12 @@
             <artifactId>rest-assured</artifactId>
             <version>4.3.2</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.applaudo.core</groupId>
+            <artifactId>Core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
