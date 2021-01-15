@@ -1,6 +1,5 @@
-package selenium;
+package StoreInfo;
 
-import com.applaudo.challenge.actions.PageActions;
 import base.Base;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -10,6 +9,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import pageobjects.StartPageObjects;
 import java.io.IOException;
 import java.util.List;
 
@@ -22,12 +22,12 @@ public class StoreInfoTests extends Base {
     ExtentTest etTestLogger = null;
 
     //Page Actions
-    PageActions oTestPageAction = null;
+    StartPageObjects oStartPageActions = null;
 
     @BeforeClass
     public void beforeClass() throws IOException {
 
-        oTestPageAction = new PageActions(myDriver);
+        oStartPageActions = new StartPageObjects(myDriver);
 
         // start reporters
         htmlReporter = new ExtentHtmlReporter("./Reports/ChallengeTest.html");
@@ -41,7 +41,7 @@ public class StoreInfoTests extends Base {
     @AfterClass
     public void afterClass() {
         erExtent.flush();
-        myDriver.quit();
+        //myDriver.quit();
     }
 
     @Test(groups = "Store")
@@ -51,15 +51,15 @@ public class StoreInfoTests extends Base {
 
             //SCROLL TO BOTTOM
             etTestLogger.log(Status.INFO, "Start Test.");
-            oTestPageAction.scrollToBottom();
+            oStartPageActions.scrollToBottom();
             etTestLogger.log(Status.PASS, "Scroll to bottom.");
 
             //GET THE STORE INFORMATION
-            List<String> sListOfResult = oTestPageAction.getStoreInfo();
+            List<String> sListOfResult = oStartPageActions.getStoreInfo();
             for (String sElement : sListOfResult) {
                 System.out.println(sElement);
                 etTestLogger.log(Status.INFO, "Validate: " + sElement);
-                Assert.assertTrue(sElement.equals("Selenium Framework, Research Triangle Park, North Carolina, USA") || sElement.equals("Call us now: (347) 466-7432") || sElement.equals("Email: support@seleniumframework.com"));
+                Assert.assertTrue(sElement.contains("Selenium Framework, Research Triangle Park, North Carolina, USA") || sElement.contains("Call us now: (347) 466-7432") || sElement.contains("Email: support@seleniumframework.com"));
                 etTestLogger.log(Status.PASS, "Pass: " + sElement);
             }
         }catch (Exception eEx){

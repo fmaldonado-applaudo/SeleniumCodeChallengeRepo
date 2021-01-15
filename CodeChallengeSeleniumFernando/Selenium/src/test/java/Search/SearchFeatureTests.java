@@ -1,6 +1,7 @@
-import com.applaudo.challenge.actions.PageActions;
+package Search;
+
 import base.Base;
-import com.applaudo.challenge.dataproviders.DataProviders;
+import dataproviders.DataProviders;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
@@ -9,6 +10,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import pageobjects.StartPageObjects;
 import java.io.IOException;
 
 public class SearchFeatureTests extends Base {
@@ -19,12 +21,12 @@ public class SearchFeatureTests extends Base {
     ExtentTest etTestLogger = null;
 
     //Page Actions
-    PageActions oTestPageAction = null;
+    StartPageObjects oStartPageActions = null;
 
     @BeforeClass
     public void beforeClass() throws IOException {
 
-        oTestPageAction = new PageActions(myDriver);
+        oStartPageActions = new StartPageObjects(myDriver);
 
         // start reporters
         htmlReporter = new ExtentHtmlReporter("./Reports/ChallengeTest.html");
@@ -39,7 +41,7 @@ public class SearchFeatureTests extends Base {
     @AfterClass
     public void afterClass() {
         erExtent.flush();
-        myDriver.quit();
+        //myDriver.quit();
     }
 
 
@@ -56,12 +58,12 @@ public class SearchFeatureTests extends Base {
         //TYPE THE VALUE IN THE SEARCH INPUT
         etTestLogger.log(Status.INFO,"Start Test.");
         etTestLogger.log(Status.INFO,"Insert the value: " + sValue);
-        oTestPageAction.typeInSearchInputAnd(sValue);
+        oStartPageActions.typeInSearchInputAnd(sValue);
 
         //CLICK SEARCH BUTTON AND VALIDATE THE RESULT
         etTestLogger.log(Status.INFO,"Click search button.");
-        oTestPageAction.clickSearchButton();
-        sResult = oTestPageAction.getResultTextAfterSearch();
+        oStartPageActions.clickSearchButton();
+        sResult = oStartPageActions.getResultTextAfterSearch();
         if(sType.equals("Negative")){
             //INVALID VALUES VALIDATION
             Assert.assertEquals(sResult,"0 results have been found.");

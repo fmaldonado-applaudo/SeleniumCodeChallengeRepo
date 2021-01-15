@@ -1,11 +1,13 @@
-package com.applaudo.challenge.pageobjects;
+package pageobjects;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StartPageObjects {
@@ -32,68 +34,40 @@ public class StartPageObjects {
     private final By selectorForResultText = By.xpath("//span[contains(text(),'been found.')]");
 
     //Variable to find the list that contains the store info
-    private final By selectorForFooterUl = By.xpath("//body/div[@id='page']/div[3]/footer[1]/div[1]/section[6]/div[1]/ul[1]");
-
-    //Variable to find the li inside ul
-    private final By selectorForFooterIl = By.tagName("li");
+    private final By selectorForFooterUl = By.xpath("//section[@id='block_contact_infos']//ul[contains(@class, 'toggle-footer')]");
 
 
 
-    // ================================================== LOCATE OBJECT SECTION =============================================================
 
-    /*
-     * METHOD: getFirstItemInCart
-     * AUTHOR: Fernando Maldonado
-     * CREATED: 29/DIC/2020- Fernando Maldonado
-     * UPDATED: 29/DIC/2020- Fernando Maldonado
-     */
-    public WebElement getFirstItemInCart(String sTextValue) {
-        WebDriverWait wdWait = new WebDriverWait(myDriver,15);
-        return myDriver.findElement(selectorForCartItem(sTextValue));
+    // ================================================== ACTIONS =============================================================
+
+    public void clickAnyItem(String sTextValue){
+        myDriver.findElement(selectorForCartItem(sTextValue)).click();
     }
 
-    /*
-     * METHOD: getSearchInput
-     * AUTHOR: Fernando Maldonado
-     * CREATED: 05/JAN/2021- Fernando Maldonado
-     * UPDATED: 05/JAN/2021- Fernando Maldonado
-     */
-    public WebElement getSearchInput() {
-        WebDriverWait wdWait = new WebDriverWait(myDriver,15);
-        return wdWait.until(ExpectedConditions.visibilityOfElementLocated(selectorForSearchInput));
+    public void typeInSearchInputAnd(String sValue){
+        myDriver.findElement(selectorForSearchInput).sendKeys(sValue);
     }
 
-    /*
-     * METHOD: getSearchButton
-     * AUTHOR: Fernando Maldonado
-     * CREATED: 05/JAN/2021- Fernando Maldonado
-     * UPDATED: 05/JAN/2021- Fernando Maldonado
-     */
-    public WebElement getSearchButton() {
-        WebDriverWait wdWait = new WebDriverWait(myDriver,15);
-        return wdWait.until(ExpectedConditions.visibilityOfElementLocated(selectorForSearchButton));
+    public void clickSearchButton(){
+        myDriver.findElement(selectorForSearchButton).click();
     }
 
-    /*
-     * METHOD: getResultText
-     * AUTHOR: Fernando Maldonado
-     * CREATED: 05/JAN/2021- Fernando Maldonado
-     * UPDATED: 05/JAN/2021- Fernando Maldonado
-     */
-    public WebElement getResultText() {
-        WebDriverWait wdWait = new WebDriverWait(myDriver,15);
-        return wdWait.until(ExpectedConditions.visibilityOfElementLocated(selectorForResultText));
+    public String getResultTextAfterSearch(){
+        return myDriver.findElement(selectorForResultText).getText();
     }
 
-    /*
-     * METHOD: getFooterUl
-     * AUTHOR: Fernando Maldonado
-     * CREATED: 05/JAN/2021- Fernando Maldonado
-     * UPDATED: 05/JAN/2021- Fernando Maldonado
-     */
-    public  List<WebElement> getFooterStoreInfo() {
-        WebDriverWait wdWait = new WebDriverWait(myDriver,15);
-        WebElement weElement = wdWait.until(ExpectedConditions.visibilityOfElementLocated(selectorForFooterUl));
-        return weElement.findElements(selectorForFooterIl);
+    public List<String> getStoreInfo(){
+        List<String> sListOfResult = new ArrayList<>();
+        List<WebElement> weElements =  myDriver.findElements(selectorForFooterUl);
+        for (WebElement weElement : weElements) {
+            sListOfResult.add(weElement.getText());
+        }
+        return sListOfResult;
+    }
+
+    public void scrollToBottom(){
+        JavascriptExecutor jsExecutor = (JavascriptExecutor)myDriver;
+        jsExecutor.executeScript("window.scrollTo(0, document.body.scrollHeight)");
     }
 }

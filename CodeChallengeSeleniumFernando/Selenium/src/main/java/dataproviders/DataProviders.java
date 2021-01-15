@@ -1,4 +1,4 @@
-package com.applaudo.challenge.dataproviders;
+package dataproviders;
 
 import org.testng.annotations.DataProvider;
 

@@ -1,4 +1,4 @@
-package com.applaudo.challenge.pageobjects;
+package pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -22,36 +22,22 @@ public class CartPageObject {
 
     // ================================================== LOCATE OBJECT SECTION =============================================================
 
-    /*
-     * METHOD: getItemInCart
-     * AUTHOR: Fernando Maldonado
-     * CREATED: 04/JAN/2021- Fernando Maldonado
-     * UPDATED: 04/JAN/2021- Fernando Maldonado
-     */
-    public WebElement getItemInCart() {
-        WebDriverWait wdWait = new WebDriverWait(myDriver,15);
-        return wdWait.until(ExpectedConditions.visibilityOfElementLocated(selectorForTrashButton));
+    public boolean validateExistingItem(){
+        try {
+            WebDriverWait wdWait = new WebDriverWait(myDriver,15);
+            return wdWait.until(ExpectedConditions.visibilityOfElementLocated(selectorForTrashButton)).isDisplayed();
+        }catch (Exception eEx){
+            return false;
+        }
     }
 
-    /*
-     * METHOD: getTrashButton
-     * AUTHOR: Fernando Maldonado
-     * CREATED: 04/JAN/2021- Fernando Maldonado
-     * UPDATED: 04/JAN/2021- Fernando Maldonado
-     */
-    public WebElement getTrashButton() {
-        WebDriverWait wdWait = new WebDriverWait(myDriver,15);
-        return wdWait.until(ExpectedConditions.visibilityOfElementLocated(selectorForTrashButton));
+    public void clickTrashButton(){
+        myDriver.findElement(selectorForTrashButton).click();
     }
 
-    /*
-     * METHOD: getEmptyCartMessage
-     * AUTHOR: Fernando Maldonado
-     * CREATED: 04/JAN/2021- Fernando Maldonado
-     * UPDATED: 04/JAN/2021- Fernando Maldonado
-     */
-    public WebElement getEmptyCartMessage() {
+    public String getEmptyCartMessage(){
         WebDriverWait wdWait = new WebDriverWait(myDriver,15);
-        return wdWait.until(ExpectedConditions.visibilityOfElementLocated(selectorForEmptyCartMessage));
+        return wdWait.until(ExpectedConditions.visibilityOfElementLocated(selectorForEmptyCartMessage)).getText();
     }
+
 }
