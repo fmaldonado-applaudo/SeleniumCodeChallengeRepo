@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Core" />
         <module name="RestAssured" />
+        <module name="Selenium" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
