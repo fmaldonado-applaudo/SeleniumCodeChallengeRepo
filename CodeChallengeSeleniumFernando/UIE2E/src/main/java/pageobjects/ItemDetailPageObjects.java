@@ -18,36 +18,36 @@ public class ItemDetailPageObjects {
     // ================================================== BY VARIABLE SECTION =============================================================
 
     //Variable to find "Add to cart" Button
-    private final By selectorForAddToCart = By.name("Submit");
+    private final String selectorForAddToCartByName = "Submit";
 
     //Variable to find the success text from the popup window
-    private final By selectorForSuccessText = By.xpath("//*[contains(@class, 'layer_cart_product col-xs-12 col-md-6')]//h2");
+    private final String selectorForSuccessTextByXpath = "//*[contains(@class, 'layer_cart_product col-xs-12 col-md-6')]//h2";
 
     //Variable to find the close button in the popup window
-    private final By selectorForCloseButton = By.cssSelector(".cross");
+    private final String selectorForCloseButtonByCssSelector = ".cross";
 
     //Variable to find the cart button
-    private final By selectorForCartButton = By.xpath("//a[contains(@title, 'View my shopping cart')]");
+    private final String selectorForCartButtonByXpath = "//a[contains(@title, 'View my shopping cart')]";
 
 
 
     // ================================================== ACTIONS =============================================================
 
-    public void clickAddToCartButton(){
-        myDriver.findElement(selectorForAddToCart).click();
+    public void goToDetailsPage(){
+        myDriver.findElement(By.name(selectorForAddToCartByName)).click();
     }
 
     public String getSuccessText(){
         WebDriverWait wdWait = new WebDriverWait(myDriver,15);
-        return wdWait.until(ExpectedConditions.visibilityOfElementLocated(selectorForSuccessText)).getText();
+        return wdWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(selectorForSuccessTextByXpath))).getText();
     }
 
-    public void clickCloseButton(){
-        myDriver.findElement(selectorForCloseButton).click();
+    public void closeVerificationWindow(){
+        myDriver.findElement(By.cssSelector(selectorForCloseButtonByCssSelector)).click();
     }
 
-    public void hoverInCartButtonAndClick(){
-        WebElement weElement = myDriver.findElement(selectorForCartButton);
+    public void naviageToCart(){
+        WebElement weElement = myDriver.findElement(By.xpath(selectorForCartButtonByXpath));
 
         Actions aActions = new Actions(myDriver);
         Action mouseOverButton = aActions

@@ -25,41 +25,41 @@ public class StartPageObjects {
     }
 
     //Variable to find the search input
-    private final By selectorForSearchInput = By.id("search_query_top");
+    private final String selectorForSearchInputById = "search_query_top";
 
     //Variable to find the search button
-    private final By selectorForSearchButton = By.name("submit_search");
+    private final String selectorForSearchButtonByName ="submit_search";
 
     //Variable to find the result text from the search
-    private final By selectorForResultText = By.xpath("//span[contains(text(),'been found.')]");
+    private final String selectorForResultTextByXpath = "//span[contains(text(),'been found.')]";
 
     //Variable to find the list that contains the store info
-    private final By selectorForFooterUl = By.xpath("//section[@id='block_contact_infos']//ul[contains(@class, 'toggle-footer')]");
+    private final String selectorForFooterUlByXpath = "//section[@id='block_contact_infos']//ul[contains(@class, 'toggle-footer')]";
 
 
 
 
     // ================================================== ACTIONS =============================================================
 
-    public void clickAnyItem(String sTextValue){
+    public void addItemToCart(String sTextValue){
         myDriver.findElement(selectorForCartItem(sTextValue)).click();
     }
 
-    public void typeInSearchInputAnd(String sValue){
-        myDriver.findElement(selectorForSearchInput).sendKeys(sValue);
+    public void typeItemInSearchBar(String sValue){
+        myDriver.findElement( By.id(selectorForSearchInputById)).sendKeys(sValue);
     }
 
-    public void clickSearchButton(){
-        myDriver.findElement(selectorForSearchButton).click();
+    public void searchForAnItem(){
+        myDriver.findElement(By.name(selectorForSearchButtonByName)).click();
     }
 
     public String getResultTextAfterSearch(){
-        return myDriver.findElement(selectorForResultText).getText();
+        return myDriver.findElement(By.xpath(selectorForResultTextByXpath)).getText();
     }
 
     public List<String> getStoreInfo(){
         List<String> sListOfResult = new ArrayList<>();
-        List<WebElement> weElements =  myDriver.findElements(selectorForFooterUl);
+        List<WebElement> weElements =  myDriver.findElements(By.xpath(selectorForFooterUlByXpath));
         for (WebElement weElement : weElements) {
             sListOfResult.add(weElement.getText());
         }

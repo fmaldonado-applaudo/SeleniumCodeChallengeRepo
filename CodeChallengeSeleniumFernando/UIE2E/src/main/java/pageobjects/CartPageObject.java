@@ -15,29 +15,29 @@ public class CartPageObject {
     // ================================================== BY VARIABLE SECTION =============================================================
     
     //Variable to find trash button
-    private final By selectorForTrashButton = By.xpath("//*[contains(@title, 'Delete')]");
+    private final String selectorForTrashButtonByXpath = "//*[contains(@title, 'Delete')]";
 
     //Variable to find empty cart message
-    private final By selectorForEmptyCartMessage = By.xpath("//p[contains(text(),'Your shopping cart is empty.')]");
+    private final String selectorForEmptyCartMessageByXpath = "//p[contains(text(),'Your shopping cart is empty.')]";
 
     // ================================================== LOCATE OBJECT SECTION =============================================================
 
-    public boolean validateExistingItem(){
+    public boolean verifyCartNotEmpty(){
         try {
             WebDriverWait wdWait = new WebDriverWait(myDriver,15);
-            return wdWait.until(ExpectedConditions.visibilityOfElementLocated(selectorForTrashButton)).isDisplayed();
+            return wdWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(selectorForTrashButtonByXpath))).isDisplayed();
         }catch (Exception eEx){
             return false;
         }
     }
 
-    public void clickTrashButton(){
-        myDriver.findElement(selectorForTrashButton).click();
+    public void deleteItemFromCart(){
+        myDriver.findElement(By.xpath(selectorForTrashButtonByXpath)).click();
     }
 
     public String getEmptyCartMessage(){
         WebDriverWait wdWait = new WebDriverWait(myDriver,15);
-        return wdWait.until(ExpectedConditions.visibilityOfElementLocated(selectorForEmptyCartMessage)).getText();
+        return wdWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(selectorForEmptyCartMessageByXpath))).getText();
     }
 
 }
