@@ -6,9 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="UIE2E" />
         <module name="Core" />
-        <module name="RestAssured" />
-        <module name="Selenium" />
+        <module name="APITests" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

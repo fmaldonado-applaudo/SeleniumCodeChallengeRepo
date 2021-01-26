@@ -10,8 +10,8 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>Core</module>
-        <module>RestAssured</module>
-        <module>Selenium</module>
+        <module>APITests</module>
+        <module>UIE2E</module>
     </modules>
 
     <properties>
@@ -63,18 +63,6 @@
             <scope>compile</scope>
         </dependency>
 
-        <!--<dependency>
-            <groupId>com.applaudo.core</groupId>
-            <artifactId>Core</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.applaudo.selenium</groupId>
-            <artifactId>Selenium</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency> -->
     </dependencies>
 
 </project>
